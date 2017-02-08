@@ -1,0 +1,73 @@
+# screen文档：http://www.gnu.org/software/screen/manual/screen.html
+
+# 遇到问题，screen启动后shell配置文件没有被加载，导致alias，自定义的配置全部失效，解决方法如下：
+# screen启动后，自动加载当前shell配置文件，shell变量需要已经被定义（一般登录到shell后，SHELL变量已经被定义，echo $SHELL 可以查看，因此不需要自己定义）
+shell -$SHELL
+
+# 启动时不显示欢迎屏幕
+startup_message off
+
+# 遇到问题：screen 显示乱码，解决方法如下：
+# 必须在启动screen窗口前设置编码，否则编码设置无法生效
+# 设置编码为UTF-8
+defencoding UTF-8
+# 设置项GBK编码转为UTF-8
+encoding UTF-8 UTF-8
+
+
+# 关闭visual bell模式，否则shell有提示音时，屏幕会闪烁
+vbell off
+
+
+####################################################################
+defscrollback 409600
+termcapinfo xterm* ti@:te@
+
+
+####################################################################
+#
+#### 使用命令：showkey -a 然后输入对应按键，来取得快捷键对应的应填入bindkey中值
+#### 这样可以避免使用在windows平台使用putty的连接linux时，bindkey失效的问题
+#
+##进行快捷键的绑定
+bindkey  "^[[19~" focus     # F8    光标移动到下一个窗口
+bindkey  "^[[20~" screen    # F9    创建一个新的screen
+bindkey  "^[[21~" detach    # F10   detach
+bindkey  "^[[23~" prev      # F11   前一个screen
+bindkey  "^[[24~" next      # F12   下一个screen
+
+bindkey  "^[[15~" split -v  # F5 创建垂直空白窗口，选择空白窗口后，可以创建或者选择已有的窗口，attch到该空白窗口
+bindkey  "^[[17~" split     # F6 创建水平空白窗口，选择空白窗口后，可以创建或者选择已有的窗口，attch到该空白窗口
+
+bind o only                 # 关闭其他窗口，只剩下当前窗口
+bind r remove               # 关闭当前窗口
+
+# Sets whether screen will automatically detach upon hangup
+autodetach on
+
+term xterm
+
+# screen命令执行后，启动2个screen窗口，并选择第0个窗口
+screen
+select 0
+
+###### my configure ######
+
+
+##use ` as the Global Key
+### escape ``
+###set a biger buffer
+hardstatus alwayslastline
+shelltitle "$|bash"
+
+hardstatus string '%{= kG}[%= %{= kw}%?%-Lw%?%{Y}%n*%f%t %{K}%?%+Lw%?%= %{kG}][ %{C}(c-a o) Only (c-a r) Remove (F5)VSp (F6) Sp (F8)Move (F9)New (F10)Detach (F11)Prev (F12)Next]'
+
+
+# 让虚拟终端的行为看起来像xterm终端
+# 能够解决vim退出后，缓冲区仍然显示的问题
+altscreen on
+
+# attrcolor用于改变终端显示颜色，详见man screen
+#attrcolor b "R"
+#attrcolor u "-u B"
+

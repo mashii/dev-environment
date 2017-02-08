@@ -1,0 +1,56 @@
+#!/bin/bash
+
+BACKUP_DIR=~/.dev-environment-bak
+
+
+function uninstall()
+{
+    mv ${BACKUP_DIR}/bashrc       ~        &> /dev/null
+    mv ${BACKUP_DIR}/bash_profile ~        &> /dev/null
+    mv ${BACKUP_DIR}/inputrc      ~        &> /dev/null
+}
+
+function install ()
+{
+    mv ~/.bashrc        ${BACKUP_DIR}/bashrc			&> /dev/null
+    mv ~/.bash_profile  ${BACKUP_DIR}/bash_profile              &> /dev/null
+    mv ~/.inputrc       ${BACKUP_DIR}/inputrc                   &> /dev/null
+
+    cp ./bashrc         ~/.bashrc
+    cp ./bash_profile   ~/.bash_profile
+    cp ./inputrc        ~/.inputrc
+}
+
+function main()
+{
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: $0 [install|uninstall]"
+        exit
+    fi
+
+    # 创建备份目录
+    mkdir -p ${BACKUP_DIR}
+    if [[ $? -ne 0 ]]; then
+        echo "create backup dir: ${BACKUP_DIR} failed, exit!"
+        exit
+    fi
+
+    case $1 in
+        'install')
+            echo "init bash"
+            install
+            ;;
+
+        'uninstall')
+            echo "uninstall bash"
+            uninstall
+            ;;
+
+        *)
+            echo "unknown command $1, Usage: $0 [install|uninstall]"
+            ;;
+    esac
+    echo "done"
+}
+
+main $@

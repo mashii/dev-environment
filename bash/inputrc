@@ -1,0 +1,18 @@
+# 第一个tab就显示补全列表，而不是两个
+set show-all-if-ambiguous on
+
+# 目录的符号链接带'/'后缀
+set mark-symlinked-directories on
+
+# 命令补全时，忽略大小写
+set completion-ignore-case on
+
+# 补全文件时，不显示隐藏文件
+set match-hidden-files off
+
+# ctrl + k/j: 将已经输入的内容作为前缀，匹配上/下一个前缀相等的历史输入
+"\C-k": history-search-backward
+"\C-j": history-search-forward
+
+# ctrl + l: 清屏
+"\C-l": clear-screen

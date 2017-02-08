@@ -1,0 +1,41 @@
+#!/bin/bash
+
+function uninstall()
+{
+    sed -i "/alias rm='~\/.trash.sh'/d" ~/.bashrc
+    rm ~/.trash.sh -rf
+}
+
+function install()
+{
+    uninstall
+    cp trash.sh ~/.trash.sh
+    echo "alias rm='~/.trash.sh'" >> ~/.bashrc
+}
+
+function main()
+{
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: $0 [install|uninstall]"
+        exit
+    fi
+
+    case $1 in
+        'install')
+            echo 'init trash'
+            install
+            ;;
+
+        'uninstall')
+            echo 'uninstall screen'
+            uninstall
+            ;;
+
+        *)
+            echo "unknown command $1, Usage: $0 [install|uninstall]"
+            ;;
+    esac
+    echo "done"
+}
+
+main $@

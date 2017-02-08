@@ -1,0 +1,45 @@
+#!/bin/bash
+
+function uninstall()
+{
+    rm ~/.dir-tag -rf
+    sed -i '/source ~\/.dir-tag\/command.sh/d' ~/.bashrc
+    sed -i '/source ~\/.dir-tag\/command-complete.sh/d' ~/.bashrc
+}
+
+function install()
+{
+    uninstall
+
+    cp ./dir-tag ~/.dir-tag -rf
+    echo 'source ~/.dir-tag/command.sh'               >> ~/.bashrc
+    echo 'source ~/.dir-tag/command-complete.sh'      >> ~/.bashrc
+}
+
+function main()
+{
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: $0 [install|uninstall]"
+        exit
+    fi
+
+    case $1 in
+        'install')
+            echo 'init dir-tag'
+            install
+            ;;
+
+        'uninstall')
+            echo 'uninstall dir-tag'
+            uninstall
+            ;;
+
+        *)
+            echo "unknown command $1, Usage: $0 [install|uninstall]"
+            ;;
+    esac
+    echo "done"
+    echo "please relogin to make it work"
+}
+
+main $@

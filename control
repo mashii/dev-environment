@@ -1,0 +1,44 @@
+#!/bin/bash
+
+function uninstall()
+{
+    (cd bash     && ./control uninstall)
+    (cd screen   && ./control uninstall)
+    (cd trash    && ./control uninstall)
+    (cd dir-tag  && ./control uninstall)
+}
+
+function install()
+{
+    (cd bash     && ./control install)
+    (cd screen   && ./control install)
+    (cd trash    && ./control install)
+    (cd dir-tag  && ./control install)
+}
+
+function main()
+{
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: $0 [install|uninstall]"
+        exit
+    fi
+
+    case $1 in
+        'install')
+            echo 'install ...'
+            install
+            ;;
+
+        'uninstall')
+            echo 'uninstall ...'
+            uninstall
+            ;;
+
+        *)
+            echo "unknown command $1, Usage: $0 [install|uninstall]"
+            ;;
+    esac
+    echo "done"
+}
+
+main $@

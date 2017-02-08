@@ -1,0 +1,62 @@
+# .bashrc
+
+# 加载bash全局配置
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# 设置shell命令提示符
+#
+# PS1：就是用户平时的提示符。
+# PS2：第一行没输完，等待第二行输入的提示符。
+#
+# \d ：代表日期，格式为weekday month date，例如："Mon Aug1"
+# \H：完整的主机名称。例如：我的机器名称为：fc4.linux，则这个名称就是fc4.linux
+# \h ：仅取主机的第一个名字，如上例，则为fc4，.linux则被省略
+# \t ：显示时间为24小时格式，如：HH：MM：SS
+# \T ：显示时间为12小时格式
+# \A ：显示时间为24小时格式：HH：MM
+# \u ：当前用户的账号名称
+# \v ：BASH的版本信息
+# \w ：完整的工作目录名称。家目录会以 ~代替
+# \W ：利用basename取得工作目录名称，所以只会列出最后一个目录
+# \# ：下达的第几个命令
+# \$ ：提示字符，如果是root时，提示符为：# ，普通用户则为：$
+IP=`ifconfig | sed -n 2p | awk  '{ print $2 }' | tr -d 'addr:'`
+PS1="\u@\${IP}:\w\$ "
+PS2=">"
+
+
+# 保存历史命令最大记录数
+export HISTSIZE=5000
+
+
+# 将命令行设置为vi模式
+set -o vi
+
+
+# 命令别名
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias vi='vim'
+alias grep='grep --color -n'
+alias fgrep='grep --color -n'
+alias egrep='grep --color -n'
+
+
+# 解决退出vi后，屏幕上的编辑内容还留在屏幕上的问题，如果TERM=linux就会出现
+export TERM=xterm
+
+
+# 设置man page配色
+man() {
+    env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
