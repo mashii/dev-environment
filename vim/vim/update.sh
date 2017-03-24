@@ -12,4 +12,3 @@ git clone https://github.com/mbbill/undotree.git
 git clone https://github.com/terryma/vim-multiple-cursors.git
 git clone https://github.com/SirVer/ultisnips.git
 git clone https://github.com/Yggdroot/vim-mark.git
-git clone https://github.com/fholgado/minibufexpl.vim.git
