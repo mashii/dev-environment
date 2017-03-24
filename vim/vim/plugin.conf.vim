@@ -14,7 +14,11 @@ if has("python") || has("python3")
     let g:UltiSnipsJumpForwardTrigger  =      "<c-j>"           " 跳转到展开snippets待修改的下一个位置
     let g:UltiSnipsJumpBackwardTrigger =      "<c-k>"           " 跳转到展开snippets待修改的上一个位置
 
-    let g:UltiSnipsSnippetsDir         = "~/.vim/UltiSnips/"
+
+    "
+    set rtp += "~/.vim/ultisnippets/"
+
+    let g:UltiSnipsSnippetsDir         = "~/.vim/ultisnippets/"
     " snippets文件存放目录,UltiSnipsEdit命令会从这个目录中查找对应文件类型的snippets
     " 注意目录名名称不能为snippets,这个时保留给snipmate的snippets使用的
     let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir]
