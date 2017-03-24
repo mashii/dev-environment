@@ -12,7 +12,7 @@ function uninstall()
 
 function install ()
 {
-    mv ~/.bashrc        ${BACKUP_DIR}/bashrc			&> /dev/null
+    mv ~/.bashrc        ${BACKUP_DIR}/bashrc                    &> /dev/null
     mv ~/.bash_profile  ${BACKUP_DIR}/bash_profile              &> /dev/null
     mv ~/.inputrc       ${BACKUP_DIR}/inputrc                   &> /dev/null
 

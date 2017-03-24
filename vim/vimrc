@@ -1,150 +1,56 @@
-set nu                      "" 显示行号
-set showmode                "" 当vim的编辑模式变化时,在显示vim当前所处的编辑模式
-set backspace=2             "" 设置backspace的行为,详见:help backspace
-set showcmd                 "" 在command line显示输入命令，对于一些比较长的映射命令有用，可以看到其中间输入了什么
-set nocompatible            "" 不兼容vi
-syntax on                   "" vim高亮
-color desert                "" 设置vim配色方案,配色方案文件一般放在runtimepath下的syntax目录下
-set swapfile
-set nowrap                    " 单行显示不下，是否另起一行显示
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-filetype on                 "" start the file type judge
-filetype plugin on          "" enable plugin for specific file type
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-"" 搜索设置
-set incsearch               "" 增量搜索,显示匹配的中间结果
-set hlsearch                "" 高亮显示结果
-set ignorecase smartcase    "" 默认忽略大小写,当搜索串中包含大写字符,则区分大小写
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+" Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'file://~/.vim/bundle/a.vim/'
+Plugin 'file://~/.vim/bundle/ctrlp.vim'
+Plugin 'file://~/.vim/bundle/tabular'
+Plugin 'file://~/.vim/bundle/tagbar'
+Plugin 'file://~/.vim/bundle/ultisnips'
+Plugin 'file://~/.vim/bundle/undotree'
+Plugin 'file://~/.vim/bundle/vim-easymotion'
+Plugin 'file://~/.vim/bundle/vim-mark'
+Plugin 'file://~/.vim/bundle/vim-multiple-cursors'
+Plugin 'file://~/.vim/bundle/Vundle.vim/minibufexpl.vim'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
 
-"" 缩进设置
-set autoindent              "" Copy indent from current line when starting a new line
-set cindent                 "" indent according the c indenting rules
-set smartindent             "" Do smart autoindenting when starting a new line.
-                            ""Works for C-like
-                            "" programs, but can also be used for other languages.
-                            "" When 'cindent' is on, setting 'si' has no effect
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
 
-set expandtab               "" 使用空格替代tab
-set tabstop=4               "" 一个tab占位4个空格
-set softtabstop=4
-set smarttab
-set shiftwidth=4
-
-"" 行末空格显示为"-",  行末Tab显示为">-"
-set list
-set listchars=trail:-,tab:>-
-
-
-"" 编码设置
-set fileencoding=utf-8                  " 文件保存编码类型
-set fileencodings=utf-8,gbk,default     " vim打开文件时，文件编码猜测列表
-set encoding=utf-8                      " vim内部字符编码类型
-
-
-"" 显示状态栏，设置状态栏显示内容
-set laststatus=2
-set statusline=%F\ %L\ %Y\ %=[%b,0x\%B]\ [\%l,\%c]
-
-"" 代码折叠
-"set foldenable
-"set foldmethod=indent
-
-set scrolloff=5                     "" 让光标保存在最低行上边5行
-set showmatch                       "" 括号闭合时,高亮对应的括号
-set matchtime=2                     "" 高亮时间
-
-"" 消除vim光标闪烁
-set gcr=a:block-blinkon0
-"" 设置vim禁止响铃,取消屏幕闪烁
-set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
-
-"" vim版本大于7.0.4
-if  v:version >= 704
-    set colorcolumn=100                 "" 高亮第100列
-endif
-
-
-"" 设置光标所在行和列高亮，并设置gui客户端和终端vim高亮颜色
-set cursorline                      "" 高亮光标所在行
-set cursorcolumn                    "" 高亮光标所在列
-if has("gui_running")
-    hi cursorline guibg=#444444
-    hi cursorcolumn guibg=#444444
-else
-    hi cursorline  term=none cterm=none ctermbg=0
-    hi cursorcolum term=none cterm=none ctermbg=0
-endif
-
-
-"" gui窗口设置字体、大小
-if has("gui_running")
-    if has("win16") || has("win32") || has("win64")
-        set guifont=Consolas:h11
-    endif
-    set guioptions=egmrLtT
-endif
-
-
-"" 如果vim备份文件存放目录不存在，则创建
-let g:vimbackupdirectory = $HOME . '/.vimbackup'
-if has("win16") || has("win32") || has("win64")
-    let g:vimbackupdirectory = $HOME . '\vimbackup'
-endif
-if !isdirectory(g:vimbackupdirectory)
-    call mkdir(g:vimbackupdirectory, "p", 0700)
-endif
-set backup                                      " 打开文件备份
-set backupext=~                                 " 备份文件名后缀
-exec 'set backupdir=' . g:vimbackupdirectory
-
-
-"" 根据系统获取vim当前配置文件名
-let g:undofiledir = $HOME . "/.vim_undodir"
-if has("win16") || has("win32") || has("win64")
-    let g:undofiledir = $HOME . '\vim_undodir'
-endif
-if !isdirectory(g:undofiledir)
-    call mkdir(g:undofiledir, "p", 0700)
-endif
-exec 'set undodir=' . g:undofiledir
-set undofile
-
-let mapleader=','
-
-" 根据系统获取vim当前配置文件名
-let g:vimrcfile = $HOME . "/.vimrc"
-if has("win16") || has("win32") || has("win64")
-    let g:vimrcfile = $VIM . '\_vimrc'
-endif
-
-" 通过",,ss"命令，重新加载vimrc文件
-" 通过",,ee"命令，快速打开vimrc文件
-" <leader> 即为 mapleader的值
-noremap <silent> <leader><leader>ss :source <C-R>=g:vimrcfile<CR><CR>
-noremap <silent> <leader><leader>ee :e <C-R>=g:vimrcfile<CR><CR>
-
-" 自动命令，当名为.vimrc/vimrc文件被编辑并保存后，重新加载.vimrc/vimrc文件
-if has("win16") || has("win32") || has("win64")
-    exec 'autocmd! bufwritepost _vimrc source ' . g:vimrcfile
-    exec 'autocmd! bufwritepost vimrc source ' . g:vimrcfile
-else
-    exec 'autocmd! bufwritepost .vimrc source ' . g:vimrcfile
-    exec 'autocmd! bufwritepost vimrc source ' . g:vimrcfile
-endif
-
-
-"" vim 保存上次编辑位置
-autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-
-" 切换窗口快捷键
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
-
-
-" 删除末尾的空白字符，silent!表示如果没有找到空白，不提示
-noremap <silent> <leader>rb :silent! %s/\s\+$//g<CR>
+source ~/.vim/vimrc
+source ~/.vim/plugin.conf.vim

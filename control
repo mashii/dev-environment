@@ -6,6 +6,7 @@ function uninstall()
     (cd screen   && ./control uninstall)
     (cd trash    && ./control uninstall)
     (cd dir-tag  && ./control uninstall)
+    (cd vim	 && ./control uninstall)
 }
 
 function install()
@@ -14,6 +15,7 @@ function install()
     (cd screen   && ./control install)
     (cd trash    && ./control install)
     (cd dir-tag  && ./control install)
+    (cd vim	 && ./control install)
 }
 
 function main()

@@ -1,0 +1,59 @@
+#!/bin/bash
+
+BACKUP_DIR=~/.dev-environment-bak
+
+
+function uninstall()
+{
+    rm -rf ~/.vimrc
+    rm -rf ~/.vim
+
+    mv ${BACKUP_DIR}/vimrc  ~/.vimrc
+    mv ${BACKUP_DIR}/vim    ~/.vim
+}
+
+function install ()
+{
+    rm -rf ${BACKUP_DIR}/vimrc
+    rm -rf ${BACKUP_DIR}/vim
+
+    mv ~/.vimrc         ${BACKUP_DIR}/vimrc
+    mv ~/.vim           ${BACKUP_DIR}/vim
+
+    cp ./vimrc   ~/.vimrc
+    cp ./vim     ~/.vim -rf
+}
+
+function main()
+{
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: $0 [install|uninstall]"
+        exit
+    fi
+
+    # 创建备份目录
+    mkdir -p ${BACKUP_DIR}
+    if [[ $? -ne 0 ]]; then
+        echo "create backup dir: ${BACKUP_DIR} failed, exit!"
+        exit
+    fi
+
+    case $1 in
+        'install')
+            echo "init bash"
+            install
+            ;;
+
+        'uninstall')
+            echo "uninstall bash"
+            uninstall
+            ;;
+
+        *)
+            echo "unknown command $1, Usage: $0 [install|uninstall]"
+            ;;
+    esac
+    echo "done"
+}
+
+main $@
