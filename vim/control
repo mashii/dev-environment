@@ -17,8 +17,8 @@ function install ()
     rm -rf ${BACKUP_DIR}/vimrc
     rm -rf ${BACKUP_DIR}/vim
 
-    mv ~/.vimrc         ${BACKUP_DIR}/vimrc
-    mv ~/.vim           ${BACKUP_DIR}/vim
+    mv ~/.vimrc         ${BACKUP_DIR}/vimrc  &> /dev/null
+    mv ~/.vim           ${BACKUP_DIR}/vim    &> /dev/null
 
     cp ./vimrc   ~/.vimrc
     cp ./vim     ~/.vim -rf

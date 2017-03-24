@@ -54,3 +54,10 @@ map <leader>h <Plug>(easymotion-linebackward)
 map <leader>tb :TagbarToggle<CR>
 
 """""""""""" tagbar configure end """""""""""""
+
+
+"""""""""""" minibuf configure end """"""""""""
+
+let g:miniBufExplSplitBelow=1
+
+"""""""""""" minibuf configure end """"""""""""
