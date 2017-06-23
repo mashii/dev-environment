@@ -1,8 +1,8 @@
 # screen文档：http://www.gnu.org/software/screen/manual/screen.html
 
-# 遇到问题，screen启动后shell配置文件没有被加载，导致alias，自定义的配置全部失效，解决方法如下：
-# screen启动后，自动加载当前shell配置文件，shell变量需要已经被定义（一般登录到shell后，SHELL变量已经被定义，echo $SHELL 可以查看，因此不需要自己定义）
-# 前边的连字符表示以 login bash 登录
+# 遇到问题，screen启动后shell配置文件没有被加载，导致alias，自定义的配置全部失效
+# 解决方法： 前边的连字符表示以 login bash 登录，这时候 bash 会加载 login bash
+#            会加载的 shell 配置。
 shell -/bin/bash
 
 # 启动时不显示欢迎屏幕
