@@ -19,6 +19,27 @@ fi
 endsnippet
 
 
+snippet case "case ... when ... when ... default" b
+case ${1:condition} in
+${2:cond1})
+	${3:echo cond1}
+	;;
+${4:cond2})
+	${5:echo cond2}
+	;;
+*)
+	${6:echo default}
+	;;
+esac
+endsnippet
+
+snippet cond "case cond" b
+${2:cond})
+	echo cond
+	;;
+endsnippet
+
+
 snippet elif "elif ..."
 elif [[ ${1:condition} ]]; then
 	${3:echo do_something_here}
@@ -69,6 +90,50 @@ snippet func "function ..."
 function ${1:func}()
 {
 	${2:echo do_something_here}
+}
+endsnippet
+
+
+snippet logger "logger..." b
+log_min_level=2
+
+log_core() {
+    # log level:
+    #     0 trace
+    #     1 debug
+    #     2 info
+    #     3 warn(ing)
+    #     4 error
+    #     5 fatal
+    FLG=("TRACE" "DEBUG" "INFO" "WARN" "ERROR" "FATAL")
+    level=$1
+    flg=${FLG["$level"]}
+    shift 1
+    msg="$*"
+    if [ $level -ge $log_min_level ];
+    then
+        echo `date +"%F %T.%N"`" [${flg}] ${msg}"
+    fi
+}
+
+log_fatal() {
+    log_core 5 "$*"
+}
+
+log_error() {
+    log_core 4 "$*"
+}
+
+log_warn() {
+    log_core 3 "$*"
+}
+
+log_info() {
+    log_core 2 "$*"
+}
+
+log_debug() {
+    log_core 1 "$*"
 }
 endsnippet
 
