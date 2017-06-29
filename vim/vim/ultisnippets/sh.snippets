@@ -105,35 +105,35 @@ log_core() {
     #     3 warn(ing)
     #     4 error
     #     5 fatal
-    FLG=("TRACE" "DEBUG" "INFO" "WARN" "ERROR" "FATAL")
-    level=$1
-    flg=${FLG["$level"]}
+    FLG=("TRACE" "DEBUG" "INFO " "WARN " "ERROR" "FATAL")
+    level=\$1
+    flg=\${FLG["\$level"]}
     shift 1
-    msg="$*"
-    if [ $level -ge $log_min_level ];
+    msg="\$*"
+    if [ \$level -ge $log_min_level ];
     then
-        echo `date +"%F %T.%N"`" [${flg}] ${msg}"
+        echo `date +"%F %T.%N"`" [\${flg}] \${msg}"
     fi
 }
 
 log_fatal() {
-    log_core 5 "$*"
+    log_core 5 "\$*"
 }
 
 log_error() {
-    log_core 4 "$*"
+    log_core 4 "\$*"
 }
 
 log_warn() {
-    log_core 3 "$*"
+    log_core 3 "\$*"
 }
 
 log_info() {
-    log_core 2 "$*"
+    log_core 2 "\$*"
 }
 
 log_debug() {
-    log_core 1 "$*"
+    log_core 1 "\$*"
 }
 endsnippet
 
