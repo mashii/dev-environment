@@ -5,16 +5,16 @@ endsnippet
 
 snippet if "if ..."
 if [[ ${1:condition} ]]; then
-	${2:echo do_something_here}
+    ${2:echo do_something_here}
 fi
 endsnippet
 
 
 snippet ifel "if ... else ..."
 if [[ ${1:condition} ]]; then
-	${2:echo do_something_here}
+    ${2:echo do_something_here}
 else
-	${3:echo do_something_here}
+    ${3:echo do_something_here}
 fi
 endsnippet
 
@@ -22,47 +22,47 @@ endsnippet
 snippet case "case ... when ... when ... default" b
 case ${1:condition} in
 ${2:cond1})
-	${3:echo cond1}
-	;;
+    ${3:echo cond1}
+    ;;
 ${4:cond2})
-	${5:echo cond2}
-	;;
+    ${5:echo cond2}
+    ;;
 *)
-	${6:echo default}
-	;;
+    ${6:echo default}
+    ;;
 esac
 endsnippet
 
 snippet cond "case cond" b
 ${2:cond})
-	echo cond
-	;;
+    echo cond
+    ;;
 endsnippet
 
 
 snippet elif "elif ..."
 elif [[ ${1:condition} ]]; then
-	${3:echo do_something_here}
+    ${3:echo do_something_here}
 endsnippet
 
 
 snippet while "while ..."
 while [[ ${1:condition} ]]; do
-	${2:echo do_something_here}
+    ${2:echo do_something_here}
 done
 endsnippet
 
 
 snippet for "for ..."
 for ${1:it} in ${2:range}; do
-	${3:echo do_something_here}
+    ${3:echo do_something_here}
 done
 endsnippet
 
 
 snippet fori "for ((i=0; i<n; i++))"
 for ((i=${1:0}; i<${2:10}; i++)); do
-	echo ${i}
+    echo ${i}
 done
 endsnippet
 
@@ -79,9 +79,9 @@ endsnippet
 snippet randstr "random string generator"
 function randstr()
 {
-	length=\${1:-15}
-	characters=\${2:-'[0-9a-zA-Z!@#^_]'}
-	strings /dev/urandom | grep -o ${characters} | head -n ${length} | tr -d '\n';
+    length=\${1:-15}
+    characters=\${2:-'[0-9a-zA-Z!@#^_]'}
+    strings /dev/urandom | grep -o ${characters} | head -n ${length} | tr -d '\n';
 }
 endsnippet
 
@@ -89,7 +89,7 @@ endsnippet
 snippet func "function ..."
 function ${1:func}()
 {
-	${2:echo do_something_here}
+    ${2:echo do_something_here}
 }
 endsnippet
 
@@ -140,14 +140,14 @@ endsnippet
 
 snippet readfile "read file line-by-line..."
 while read line; do
-	${2:echo ${line}}
+    ${2:echo ${line}}
 done < ${1:file}
 endsnippet
 
 
 snippet readfilebyitem "read file item-by-item ..."
 for item in $(<${1:file}); do
-	${2:echo ${item}}
+    ${2:echo ${item}}
 done
 endsnippet
 
