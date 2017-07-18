@@ -71,7 +71,6 @@ $1::~$1()
 `!p
 GenCppFuncDefList(snip, t[1], t[2])
 `
-
 endsnippet
 
 snippet ns "namespace .. (namespace)"
@@ -83,17 +82,14 @@ endsnippet
 
 snippet is "#include <...>"
 #include <${1:stdio.h}>
-
 endsnippet
 
 snippet iq "#include ''...''"
 #include "${1:stdio.h}"
-
 endsnippet
 
 snippet use "using namespace ${1:std};"
 using namespace ${1:std};
-
 endsnippet
 
 ## if else statment
@@ -129,21 +125,18 @@ snippet fori "for(;;)"
 for (int ${1:i}=0; $1<${2:n}; ++$1) {
     $3
 }
-
 endsnippet
 
 snippet fora "for const auto"
 for (auto &${1:it} : ${2:container}) {
     $3
 }
-
 endsnippet
 
 snippet forca "for const auto"
 for (const auto &${1:it} : ${2:container}) {
     $3
 }
-
 endsnippet
 
 ## while statment
@@ -151,24 +144,21 @@ snippet while "while ..."
 while(${1:true}) {
     $2
 }
-
 endsnippet
 
 
 snippet map "std::map (map)"
 std::map<${1:key}, ${2:value}> ${0:map};
-
 endsnippet
 
 snippet vector "std::vector (v)"
 std::vector<${1:int}> v$0;
-
 endsnippet
 
 snippet tp "template <typename ..> (template)"
 template <class ${1:T}>
-
 endsnippet
+
 
 snippet main "main function"
 int main(int argc, char *argv[])
