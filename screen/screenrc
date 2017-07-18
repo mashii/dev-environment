@@ -15,15 +15,21 @@ defencoding UTF-8
 # 设置项GBK编码转为UTF-8
 encoding UTF-8 UTF-8
 
+# 解决 screen 下 vim colorscheme异常的问题
+attrcolor b ".I"
+defbce "on"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+term screen-256color
+
 
 # 关闭visual bell模式，否则shell有提示音时，屏幕会闪烁
 vbell off
 
 
 ####################################################################
+
 defscrollback 409600
 termcapinfo xterm* ti@:te@
-
 
 ####################################################################
 #
