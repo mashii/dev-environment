@@ -1,9 +1,17 @@
-# .bashrc
 
-# 加载bash全局配置
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+# 如果路径是 git 仓库，则获取分支名称
+function git-branch-name {
+    git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3
+}
+
+function git-branch-prompt {
+    if [[ -n `which git 2> /dev/null` ]]; then
+        local branch=`git-branch-name`
+        if [[ -n ${branch} ]]; then
+            printf "\033[36m[%s]\033[0m " ${branch}
+        fi
+    fi
+}
 
 # 设置shell命令提示符
 #
@@ -24,12 +32,8 @@ fi
 # \$ ：提示字符，如果是root时，提示符为：# ，普通用户则为：$
 NETWORK_INTERFACE=`route -n | grep -E '^0.0.0.0' | awk '{print $8}'`
 IP=`ifconfig ${NETWORK_INTERFACE} | sed -n 2p | awk  '{ print $2 }' | tr -d 'addr:'`
-PS1="\u@\${IP}:\w\$ "
+PS1="\u@\${IP}:\w "'$(git-branch-prompt)$ '
 PS2=">"
-
-
-# 绑定快捷键`<c-p>`到fg命令，这样可以配合`<c-z>`命令将当前任务在前后台切换，比如`vim`
-bind -x '"\C-p":fg'
 
 
 # 保存历史命令最大记录数
@@ -65,3 +69,9 @@ man() {
     LESS_TERMCAP_us=$(printf "\e[1;32m") \
     man "$@"
 }
+
+
+# 从文件中加载按键绑定
+bind -f ./inputrc
+
+

@@ -1,16 +1,3 @@
-function git-branch-name {
-    git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3
-}
-
-function git-branch-prompt {
-    if [[ -n `which git 2> /dev/null` ]]; then
-        local branch=`git-branch-name`
-        if [[ -n ${branch} ]]; then
-            printf "\033[36m[%s]\033[0m " ${branch}
-        fi
-    fi
-}
-
 # git 常用别名
 git config --global alias.st status
 git config --global alias.ci commit
