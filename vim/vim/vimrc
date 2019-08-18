@@ -1,15 +1,19 @@
+"" 通用设置
 set nu                      "" 显示行号
+set t_Co=256
 set showmode                "" 当vim的编辑模式变化时,在显示vim当前所处的编辑模式
 set backspace=2             "" 设置backspace的行为,详见:help backspace
 set showcmd                 "" 在command line显示输入命令，对于一些比较长的映射命令有用，可以看到其中间输入了什么
 set nocompatible            "" 不兼容vi
 syntax on                   "" vim高亮
-color desert                "" 设置vim配色方案,配色方案文件一般放在runtimepath下的syntax目录下
 set swapfile
-set nowrap                    " 单行显示不下，是否另起一行显示
+" set nowrap                  " 单行显示不下，是否另起一行显示
+set wrap
+
 
 filetype on                 "" start the file type judge
 filetype plugin on          "" enable plugin for specific file type
+
 
 "" 搜索设置
 set incsearch               "" 增量搜索,显示匹配的中间结果
@@ -21,9 +25,10 @@ set ignorecase smartcase    "" 默认忽略大小写,当搜索串中包含大写
 set autoindent              "" Copy indent from current line when starting a new line
 set cindent                 "" indent according the c indenting rules
 set smartindent             "" Do smart autoindenting when starting a new line.
-                            ""Works for C-like
+                            "" Works for C-like
                             "" programs, but can also be used for other languages.
                             "" When 'cindent' is on, setting 'si' has no effect
+
 
 set expandtab               "" 使用空格替代tab
 set tabstop=4               "" 一个tab占位4个空格
@@ -31,10 +36,10 @@ set softtabstop=4
 set smarttab
 set shiftwidth=4
 
+
 "" 行末空格显示为"-",  行末Tab显示为">-"
 set list
 set listchars=trail:-,tab:>-
-
 
 "" 编码设置
 set fileencoding=utf-8                  " 文件保存编码类型
@@ -44,15 +49,14 @@ set encoding=utf-8                      " vim内部字符编码类型
 
 "" 显示状态栏，设置状态栏显示内容
 set laststatus=2
-set statusline=%F\ %L\ %Y\ %=[%b,0x\%B]\ [\%l,\%c]
-
-"" 代码折叠
-"set foldenable
-"set foldmethod=indent
 
 set scrolloff=5                     "" 让光标保存在最低行上边5行
 set showmatch                       "" 括号闭合时,高亮对应的括号
 set matchtime=2                     "" 高亮时间
+
+"" 设置 lead 为 ','
+let mapleader=','
+
 
 "" 消除vim光标闪烁
 set gcr=a:block-blinkon0
@@ -62,20 +66,13 @@ autocmd GUIEnter * set visualbell t_vb=
 
 "" vim版本大于7.0.4
 if  v:version >= 704
-    set colorcolumn=100                 "" 高亮第100列
+    set colorcolumn=80                 "" 高亮第80列
 endif
 
 
 "" 设置光标所在行和列高亮，并设置gui客户端和终端vim高亮颜色
 set cursorline                      "" 高亮光标所在行
 set cursorcolumn                    "" 高亮光标所在列
-if has("gui_running")
-    hi cursorline guibg=#444444
-    hi cursorcolumn guibg=#444444
-else
-    hi cursorline  term=none cterm=none ctermbg=0
-    hi cursorcolum term=none cterm=none ctermbg=0
-endif
 
 
 "" gui窗口设置字体、大小
@@ -111,52 +108,12 @@ endif
 exec 'set undodir=' . g:undofiledir
 set undofile
 
-let mapleader=','
-
 " 根据系统获取vim当前配置文件名
 let g:vimrcfile = $HOME . "/.vimrc"
 if has("win16") || has("win32") || has("win64")
     let g:vimrcfile = $VIM . '\_vimrc'
 endif
 
-" 通过",,ss"命令，重新加载vimrc文件
-" 通过",,ee"命令，快速打开vimrc文件
-" <leader> 即为 mapleader的值
-noremap <silent> <leader><leader>ss :source <C-R>=g:vimrcfile<CR><CR>
-noremap <silent> <leader><leader>ee :e <C-R>=g:vimrcfile<CR><CR>
-
-" 自动命令，当名为.vimrc/vimrc文件被编辑并保存后，重新加载.vimrc/vimrc文件
-if has("win16") || has("win32") || has("win64")
-    exec 'autocmd! bufwritepost _vimrc source ' . g:vimrcfile
-    exec 'autocmd! bufwritepost vimrc source ' . g:vimrcfile
-else
-    exec 'autocmd! bufwritepost .vimrc source ' . g:vimrcfile
-    exec 'autocmd! bufwritepost vimrc source ' . g:vimrcfile
-endif
-
 
 "" vim 保存上次编辑位置
 autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-
-" 切换窗口快捷键
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
-
-
-" 切换打开文件快捷键
-nmap <leader>1 :b 1<CR>
-nmap <leader>2 :b 2<CR>
-nmap <leader>3 :b 3<CR>
-nmap <leader>4 :b 4<CR>
-nmap <leader>5 :b 5<CR>
-nmap <leader>6 :b 6<CR>
-nmap <leader>7 :b 7<CR>
-nmap <leader>8 :b 8<CR>
-nmap <leader>9 :b 9<CR>
-
-
-" 删除末尾的空白字符，silent!表示如果没有找到空白，不提示
-noremap <silent> <leader>rb :silent! %s/\s\+$//g<CR>

@@ -1,56 +1,39 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" cpp 和 h 文件之间切换
+Plug 'vim-scripts/a.vim'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" 多单词高亮
+Plug 'vim-scripts/Mark--Karkat'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file://~/.vim/bundle/a.vim/'
-Plugin 'file://~/.vim/bundle/ctrlp.vim'
-Plugin 'file://~/.vim/bundle/tabular'
-Plugin 'file://~/.vim/bundle/tagbar'
-Plugin 'file://~/.vim/bundle/ultisnips'
-Plugin 'file://~/.vim/bundle/undotree'
-Plugin 'file://~/.vim/bundle/vim-easymotion'
-Plugin 'file://~/.vim/bundle/vim-mark'
-Plugin 'file://~/.vim/bundle/vim-multiple-cursors'
-Plugin 'file://~/.vim/bundle/Vundle.vim/minibufexpl.vim'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+" 自动对齐
+Plug 'godlygeek/tabular'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-"
+" vim 历史操作保存插件，可以在 vim 重新打开时也生效
+Plug 'mbbill/undotree'
 
-source ~/.vim/vimrc
-source ~/.vim/plugin.conf.vim
+" vim 配置
+Plug 'liuchengxu/space-vim-dark'
+
+" vim 状态栏插件及其配色
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" vim 多行操作插件
+Plug 'terryma/vim-multiple-cursors'
+
+" vim 打开文件插件
+Plug 'kien/ctrlp.vim'
+
+" 括号等自动补全插件
+Plug 'jiangmiao/auto-pairs'
+
+" vim 跳转插件
+Plug 'easymotion/vim-easymotion'
+
+call plug#end()
+
+
+source $HOME/.vim/vimrc
+source $HOME/.vim/self_define_command
+source $HOME/.vim/plugin.conf
