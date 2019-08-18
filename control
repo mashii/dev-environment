@@ -1,21 +1,52 @@
 #!/bin/bash
 
-function uninstall()
-{
-    (cd bash     && ./control uninstall)
-    (cd screen   && ./control uninstall)
-    (cd trash    && ./control uninstall)
-    (cd dir-tag  && ./control uninstall)
-    (cd vim	 && ./control uninstall)
-}
+install_dir=$HOME/.dev-environment
+
+bash_profile=$HOME/.bash_profile
+bash_file=${install_dir}/bash/bashrc
+screen_file=${install_dir}/bash/screenrc
+git_file=${install_dir}/bash/conf_git.sh
+
+trash_file=${install_dir}/trash/trash.sh
+
+dir_tag_tool_file=${install_dir}/dir-tag/dir-tag/tag-tool.sh
+dir_tag_command_file=${install_dir}/dir-tag/dir-tag/command.sh
+dir_tag_command_complete_file=${install_dir}/dir-tag/dir-tag/command-complete.sh
+
+vim_dir=$HOME/.vim
+vim_rc_file=${install_dir}/vim/vimrc
+vim_conf=${install_dir}/vim/vim/*
+
 
 function install()
 {
-    (cd bash     && ./control install)
-    (cd screen   && ./control install)
-    (cd trash    && ./control install)
-    (cd dir-tag  && ./control install)
-    (cd vim	 && ./control install)
+    mkdir -p ${install_dir} || { echo "create install dir: ${install_dir} failed"; exit -1; }
+    cp * ${install_dir} -rf || { echo "copy files to install dir: ${install_dir} failed"; exit -1; }
+
+
+    # install bash/screen/git
+    echo "source ${bash_file}" >> ${bash_profile}
+    echo "alias screen='screen -c ${screen_file}'" >> ${bash_file}
+    ${git_file}
+
+    # install trash
+    echo "alias rm='${trash_file}'" >> ${bash_file}
+
+
+    # install dir tag
+    echo "export DIRTAG_TOOL_PATH=${dir_tag_tool_file}" >> ${bash_file}
+    echo "source ${dir_tag_command_file}"               >> ${bash_file}
+    echo "source ${dir_tag_command_complete_file}"      >> ${bash_file}
+
+    # install vim
+    mkdir -p ${vim_dir}
+    cp ${vim_rc_file} $HOME/.vimrc -rf
+    cp ${vim_conf} $HOME/.vim -rf
+}
+
+function uninstall()
+{
+    test
 }
 
 function main()

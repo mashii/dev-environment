@@ -1,19 +1,27 @@
 #!/bin/bash
 
+bash_file=$HOME/.bashrc
+
+install_dir=$HOME/.dir-tag
+dir_tag_tool_file=$install_dir/tag-tool.sh
+dir_tag_command_file=$install_dir/command.sh
+dir_tag_cmmand_complete_file=$install_dir/command-complete.sh
+
 function uninstall()
 {
-    rm ~/.dir-tag -rf
-    sed -i '/source ~\/.dir-tag\/command.sh/d' ~/.bashrc
-    sed -i '/source ~\/.dir-tag\/command-complete.sh/d' ~/.bashrc
+    rm ${install_dir} -rf
+    sed -i "/source ${dir_tag_command_file}/d" ${bash_file}
+    sed -i "/source ${dir_tag_cmmand_complete_file}/d" ${bash_file}
 }
 
 function install()
 {
     uninstall
 
-    cp ./dir-tag ~/.dir-tag -rf
-    echo 'source ~/.dir-tag/command.sh'               >> ~/.bashrc
-    echo 'source ~/.dir-tag/command-complete.sh'      >> ~/.bashrc
+    cp dir-tag ${install_dir} -rf
+    echo "export DIRTAG_TOOL_PATH=${dir_tag_tool_file}" >> ${bash_file}
+    echo "source ${dir_tag_command_file}"               >> ${bash_file}
+    echo "source ${dir_tag_cmmand_complete_file}"       >> ${bash_file}
 }
 
 function main()

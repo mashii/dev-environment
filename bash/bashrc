@@ -43,6 +43,7 @@ export HISTSIZE=5000
 # 将命令行设置为vi模式
 set -o vi
 
+export LANG=en_US.UTF-8
 
 # 命令别名
 alias ls='ls --color=auto'
@@ -72,6 +73,5 @@ man() {
 
 
 # 从文件中加载按键绑定
-bind -f ./inputrc
-
-
+inputrc_dir=$(dirname $BASH_SOURCE)
+bind -f ${inputrc_dir}/inputrc

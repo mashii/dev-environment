@@ -8,10 +8,10 @@ gm=gm
 gl=gl
 gd=gd
 
-alias $to='source '$tagtool_path' to'
-alias $gm='source '$tagtool_path' mark'
-alias $gl='source '$tagtool_path' list'
-alias $gd='source '$tagtool_path' del'
+alias $to='source ${DIRTAG_TOOL_PATH} to'
+alias $gm='source ${DIRTAG_TOOL_PATH} mark'
+alias $gl='source ${DIRTAG_TOOL_PATH} list'
+alias $gd='source ${DIRTAG_TOOL_PATH} del'
 
 complete -o filenames -F CompTagFile $to
 complete -o filenames -F CompTagFile $gl
@@ -24,10 +24,10 @@ gless=gless
 gtail=gtail
 gvim=gvim
 
-alias $gcat='source '$tagtool_path' cat'
-alias $gless='source '$tagtool_path' less'
-alias $gtail='source '$tagtool_path' tail'
-alias $gvim='source '$tagtool_path' vim'
+alias $gcat='source ${DIRTAG_TOOL_PATH} cat'
+alias $gless='source ${DIRTAG_TOOL_PATH} less'
+alias $gtail='source ${DIRTAG_TOOL_PATH} tail'
+alias $gvim='source ${DIRTAG_TOOL_PATH} vim'
 
 complete -o filenames -F CompTagFile $gcat
 complete -o filenames -F CompTagFile $gless
@@ -42,10 +42,10 @@ gmv=gmv
 gpwd=gpwd
 
 
-alias gcp='source '$tagtool_path' cp'
-alias gdiff='source '$tagtool_path' diff'
-alias gmv='source '$tagtool_path' mv'
-alias gpwd='source '$tagtool_path' pwd'
+alias gcp='source ${DIRTAG_TOOL_PATH} cp'
+alias gdiff='source ${DIRTAG_TOOL_PATH} diff'
+alias gmv='source ${DIRTAG_TOOL_PATH} mv'
+alias gpwd='source ${DIRTAG_TOOL_PATH} pwd'
 
 complete -o filenames -F CompTagFileWithCurDirFile $gcp
 complete -o filenames -F CompTagFileWithCurDirFile $gdiff
