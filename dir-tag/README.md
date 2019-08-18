@@ -19,11 +19,11 @@ source ./install
     真实路径(dir-path)：linux的真实目录
     命令中可以添加对应命令的参数：如 gl -lF tag-path，gtail tag-path -f
 
-    gm [tag] 对当前目录设置标签，标签名为tag，如果不带参数，则默认使用当前目录名作为标签
-    gl [tag] 列出所有标签，如果带tag参数，则列出tag对应的目录内容
-    gd [tag] 删除对应的tag，如果不带参数，则默认使用当前目录名作为标签进行删除
+    gm [tag] (mark)对当前目录设置标签，标签名为tag，如果不带参数，则默认使用当前目录名作为标签
+    gl [tag] (list)列出所有标签，如果带tag参数，则列出tag对应的目录内容
+    gd [tag] (delet)删除对应的tag，如果不带参数，则默认使用当前目录名作为标签进行删除
 
-    go tag-path 跳转到对应的tag-path
+    to tag-path 跳转到对应的tag-path
 
     gvim  tag-path 使用vim对tag-path指向的文件、目录进行操作
     gcat  tag-path 使用cat对tag-path指向的文件、目录进行操作

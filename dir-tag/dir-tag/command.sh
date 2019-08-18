@@ -3,17 +3,17 @@
 tagtool_path="~/.dir-tag/tag-tool.sh"
 
 # ------------- version 1 -----------------------
-go=go
+to=to
 gm=gm
 gl=gl
 gd=gd
 
-alias $go='source '$tagtool_path' to'
+alias $to='source '$tagtool_path' to'
 alias $gm='source '$tagtool_path' mark'
 alias $gl='source '$tagtool_path' list'
 alias $gd='source '$tagtool_path' del'
 
-complete -o filenames -F CompTagFile $go
+complete -o filenames -F CompTagFile $to
 complete -o filenames -F CompTagFile $gl
 complete -F CompTag $gd
 
