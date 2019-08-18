@@ -25,6 +25,8 @@ function install()
 
 
     # install bash/screen/git
+    touch ${bash_profile}
+    sed -i "s#source ${bash_file}##" ${bash_profile}
     echo "source ${bash_file}" >> ${bash_profile}
     echo "alias screen='screen -c ${screen_file}'" >> ${bash_file}
     ${git_file}
