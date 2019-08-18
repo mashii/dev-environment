@@ -1,16 +1,21 @@
 #!/bin/bash
 
+
+install_dir=${HOME}/.dev-environment
+install_file=${install_dir}/transh.sh
+
 function uninstall()
 {
-    sed -i "/alias rm='~\/.trash.sh'/d" ~/.bashrc
-    rm ~/.trash.sh -rf
+    sed -i "/alias rm='${install_file}'/d" ~/.bashrc
+    rm ${install_file} -rf
 }
 
 function install()
 {
     uninstall
-    cp trash.sh ~/.trash.sh
-    echo "alias rm='~/.trash.sh'" >> ~/.bashrc
+    mkdir -p ${install_dir}
+    cp trash.sh ${install_file}
+    echo "alias rm='${install_file}'" >> ~/.bashrc
 }
 
 function main()
