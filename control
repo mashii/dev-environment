@@ -21,6 +21,7 @@ vim_conf=${install_dir}/vim/vim/*
 function install()
 {
     mkdir -p ${install_dir} || { echo "create install dir: ${install_dir} failed"; exit -1; }
+    rm -rf ${install_dir}/*
     cp * ${install_dir} -rf || { echo "copy files to install dir: ${install_dir} failed"; exit -1; }
 
 
