@@ -53,25 +53,23 @@ bind r remove               # 关闭当前窗口
 # Sets whether screen will automatically detach upon hangup
 autodetach on
 
-# screen命令执行后，启动2个screen窗口，并选择第0个窗口
-screen
-select 0
-
-###### my configure ######
-
-
-##use ` as the Global Key
-### escape ``
-###set a biger buffer
-hardstatus alwayslastline
-shelltitle "$|bash"
-
-hardstatus string '%{= kG}[%= %{= kw}%?%-Lw%?%{Y}%n*%f%t %{K}%?%+Lw%?%= %{kG}][ %{C}(c-a o) Only (c-a r) Remove (F5)VSp (F6) Sp (F8)Move (F9)New (F10)Detach (F11)Prev (F12)Next]'
-
-
 # 让虚拟终端的行为看起来像xterm终端
 # 能够解决vim退出后，缓冲区仍然显示的问题
 altscreen on
+
+
+# 使用最后一行作为状态栏，展示screen相关信息
+hardstatus alwayslastline
+shelltitle "$|bash"
+
+# NOTICE: 启动 screen 必须放在 hardstatus alwayslastline 之后，否则 vim 行号计算会出错，导致显示错处
+# 参考: https://unix.stackexchange.com/questions/358843/vi-refresh-issues-inside-screen
+# screen命令执行后，启动1个screen窗口，并选择第1个窗口
+screen
+select 0
+
+# 自定义状态栏
+hardstatus string '%{= kG}[%= %{= kw}%?%-Lw%?%{Y}%n*%f%t %{K}%?%+Lw%?%= %{kG}][ %{C}(c-a o) Only (c-a r) Remove (F5)VSp (F6) Sp (F8)Move (F9)New (F10)Detach (F11)Prev (F12)Next]'
 
 # attrcolor用于改变终端显示颜色，详见man screen
 #attrcolor b "R"
