@@ -29,7 +29,8 @@ vbell off
 ####################################################################
 
 defscrollback 409600
-termcapinfo xterm* ti@:te@
+# termcapinfo xterm* ti@:te@
+# term xterm
 
 ####################################################################
 #
@@ -51,8 +52,6 @@ bind r remove               # 关闭当前窗口
 
 # Sets whether screen will automatically detach upon hangup
 autodetach on
-
-term xterm
 
 # screen命令执行后，启动2个screen窗口，并选择第0个窗口
 screen
