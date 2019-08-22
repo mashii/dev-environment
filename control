@@ -13,9 +13,7 @@ dir_tag_tool_file=${install_dir}/dir-tag/dir-tag/tag-tool.sh
 dir_tag_command_file=${install_dir}/dir-tag/dir-tag/command.sh
 dir_tag_command_complete_file=${install_dir}/dir-tag/dir-tag/command-complete.sh
 
-vim_dir=$HOME/.vim
-vim_rc_file=${install_dir}/vim/vimrc
-vim_conf=${install_dir}/vim/vim/*
+vim_rc_file=${HOME}/.vimrc
 
 
 function install()
@@ -42,14 +40,26 @@ function install()
     echo "source ${dir_tag_command_complete_file}"      >> ${bash_file}
 
     # install vim
-    mkdir -p ${vim_dir}
-    cp ${vim_rc_file} $HOME/.vimrc -rf
-    cp ${vim_conf} $HOME/.vim -rf
+    touch ${vim_rc_file}
+    sed -i "s#source ${install_dir}/vim/vim/autoload/plug.vim##" ${vim_rc_file}
+    sed -i "s#source ${install_dir}/vim/vimrc##" ${vim_rc_file}
+
+    echo "source ${install_dir}/vim/vim/autoload/plug.vim" >> ${vim_rc_file}
+    echo "source ${install_dir}/vim/vimrc" >> ${vim_rc_file}
 }
 
 function uninstall()
 {
-    test
+    # uninstall bash/screen/git
+    touch ${bash_profile}
+    sed -i "s#source ${bash_file}##" ${bash_profile}
+
+    # uninstall vim
+    touch ${vim_rc_file}
+    sed -i "s#source ${install_dir}/vim/vim/autoload/plug.vim##" ${vim_rc_file}
+    sed -i "s#source ${install_dir}/vim/vimrc##" ${vim_rc_file}
+
+    rm -rf ${install_dir}
 }
 
 function main()

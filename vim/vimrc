@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.dev-environment/vim/plugged')
 
 " cpp 和 h 文件之间切换
 Plug 'vim-scripts/a.vim'
@@ -31,9 +31,12 @@ Plug 'jiangmiao/auto-pairs'
 " vim 跳转插件
 Plug 'easymotion/vim-easymotion'
 
+" vim 显示缩进对齐线
+Plug 'Yggdroot/indentLine'
+
 call plug#end()
 
+source ~/.dev-environment/vim/vim/vimrc
+source ~/.dev-environment/vim/vim/self_define_command
+source ~/.dev-environment/vim/vim/plugin.conf
 
-source $HOME/.vim/vimrc
-source $HOME/.vim/self_define_command
-source $HOME/.vim/plugin.conf
